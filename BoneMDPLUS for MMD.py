@@ -1,7 +1,7 @@
 bl_info = {
     "name": "BoneMD (From fbx rips all the way to unity)",
     "author": "Wealver",
-    "version": (2, 0),
+    "version": (0, 1),
     "blender": (2, 80, 0),
     "location": "View3D > Sidebar > Bone Tools",
     "description": "Renaming original PD rigging scheme and quick reparenting them to something more comprehensable. Made easily editable depending on the need!",
@@ -58,7 +58,17 @@ RENAMING_RULES = {
 
     "n_eye_*": "Eye",
     "kl_ago_": "Jaw",
+
+# Face
     
+    "tl_mabu_*_d": "Lower_Eyelid*",
+    "tl_mabu_*_u": "Upper_Eyelid*",
+    "tl_mayu*": "Brow*",
+    "tl_kuti_u_*": "Mouth_Upper*",
+    "tl_kuti_d_*": "Mouth_Lower*",
+    "tl_kuti_ds_*": "Lip_Corner*",
+    "tl_eyelid_*": "Eyefold*", 
+    "tl_tooth_upper": "Upper_Teeth"
 }
 
 
@@ -221,7 +231,7 @@ def reparent_bones(arm):
             # Uncomment for debug:
             # print(f"RULE: Parented '{name}' -> '{parent_actual}'")
 
-    # --- PASS 2: group numeric duplicates and chain them under their exact base name ---
+    # Group numeric duplicates and chain them under their exact base name
     grouped = {}
     for eb in ebones:
         if is_numbered(eb.name):
@@ -330,7 +340,7 @@ class BONE_PT_panel(bpy.types.Panel):
         # Info box at the top
         box = layout.box()
         box.label(text="BoneMD Tool", icon="INFO")
-        box.label(text="Use this tool to rename MMD bone names into Unity-ready names.")
+        box.label(text="Use this tool to rename Project Diva bone names into Unity-ready names.")
         box.label(text="Make sure your Armature is selected before pressing the button.")
 
         layout.separator()
@@ -348,7 +358,7 @@ class BONE_PT_panel(bpy.types.Panel):
         # Funny text
         credit = layout.box()
         credit.label(text="Made by Wealver", icon="USER") # Keep this unchanged, please!
-        credit.label(text="Some bone names are model spesific, this renames all the main bones (except most of the face) for now!", icon="ERROR")
+        credit.label(text="Some bone names are model spesific with skirts and hair, this renames all the main reacuring bones for now!", icon="ERROR")
         credit.label(text="If there are any issues, message me.", icon="HEART")
 
 
